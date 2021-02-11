@@ -1,0 +1,12 @@
+POST http://localhost:8000/messages/
+Content-Type: application/json
+
+{
+  "date": "2021-02-11T00:29",
+  "nickname": "abc",
+  "text": "message"
+}
+
+###
+
+GET http://localhost:8000/messages/
