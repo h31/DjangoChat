@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="stylesheet" href="ui.css">
+</head>
+<body>
+<div id="app">
+    <!-- Source: https://codepen.io/sajadhsm/pen/odaBdd -->
+    <section class="msger">
+        <header class="msger-header">
+            <div class="msger-header-title">
+                <i class="fas fa-comment-alt"></i> SimpleChat
+            </div>
+            <div class="msger-header-options">
+                <span><i class="fas fa-cog"></i></span>
+            </div>
+        </header>
+
+        <main class="msger-chat">
+            <div v-for="message in messages" class="msg right-msg">
+                <div
+                        class="msg-img"
+                        style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+                ></div>
+
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">{{ message.nickname }}</div>
+                        <div class="msg-info-time">{{ timeFromDate(message.date) }}</div>
+                    </div>
+
+                    <div class="msg-text">
+                        {{ message.text }}
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <form class="msger-inputarea">
+            <input type="text" v-model="nickname" class="msger-input" placeholder="Nickname">
+            <input type="text" v-model="text" class="msger-input" placeholder="Enter your message...">
+            <button type="submit" @click.stop.prevent="sendMessage" class="msger-send-btn">Send</button>
+        </form>
+    </section>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.js"></script>
+<script src="ui.js"></script>
+</html>
