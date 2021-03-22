@@ -1,0 +1,23 @@
+[Unit]
+Description=DjangoChat daemon
+After=network.target
+
+[Service]
+Type=simple
+DynamicUser=true
+StateDirectory=djangochat/data
+CacheDirectory=djangochat
+WorkingDirectory=/var/lib/djangochat
+ExecStartPre=+/usr/bin/chown -R $USER \
+             /var/cache/djangochat/cert.pem \
+             /var/cache/djangochat/key.pem
+ExecStart=/var/lib/djangochat/venv/bin/gunicorn \
+          --certfile=/var/cache/djangochat/cert.pem \
+          --keyfile=/var/cache/djangochat/key.pem \
+          --bind 0.0.0.0:8001 \
+          djangoChat.wsgi
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
