@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:8000 --access-logfile - djangoChat.wsgi
+    volumes:
+      - ./db:/code/data
+    ports:
+      - "8000:8000"
+
+# Migration: sudo docker-compose run web python3 manage.py migrate
