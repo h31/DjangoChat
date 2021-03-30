@@ -10,10 +10,12 @@ CacheDirectory=djangochat
 WorkingDirectory=/var/lib/djangochat
 ExecStartPre=+/usr/bin/chown -R $USER \
              /var/cache/djangochat/cert.pem \
-             /var/cache/djangochat/key.pem
+             /var/cache/djangochat/key.pem \
+             /var/cache/djangochat/cacert.pem
 ExecStart=/var/lib/djangochat/venv/bin/gunicorn \
           --certfile=/var/cache/djangochat/cert.pem \
           --keyfile=/var/cache/djangochat/key.pem \
+          --ca-cert=/var/cache/djangochat/cacert.pem \
           --bind 0.0.0.0:8001 \
           --access-logfile - \
           djangoChat.wsgi
